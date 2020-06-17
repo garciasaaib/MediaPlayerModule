@@ -1,0 +1,26 @@
+{
+  "name": "video_play",
+  "version": "1.0.0",
+  "description": "Programa para ver videos y controlarlo",
+  "main": "index.js",
+  "scripts": {
+    "start": "live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adranuz/video_player.git"
+  },
+  "keywords": [
+    "javascript",
+    "vanilla"
+  ],
+  "author": "Adrian Garcia",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adranuz/video_player/issues"
+  },
+  "homepage": "https://github.com/adranuz/video_player#readme",
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Helvetica, sans-serif;
+    }
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #7b4397;  /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #dc2430, #7b4397);  /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #dc2430, #7b4397); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+    nav {
+      color: white;
+    }
+    nav p {
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0 auto;
+      padding: 0 auto;
+    }
+    .buttons {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>Reproductor de Videos Chido</h1>
+      <p>An extensive media player</p>
+    </nav>
+  </header>
+  <main class="container">
+    <video class="movie">
+      <source src="./assets/video.mp4" />
+    </video>
+    <div class="buttons">
+      <button id="play">Play/Pause</button>
+      <button id="mute">Mute/Unmute</button>
+    </div>
+  </main>
+  <script type="module" src="./assets/index.js"></script>
+</body>
+</html>
