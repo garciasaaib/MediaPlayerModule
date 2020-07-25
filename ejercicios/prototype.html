@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototype</title>
+</head>
+<body>
+  <a href="/ejercicios/">Go back</a>
+  <p><em>Abre la consola</em></p>
+
+  <script>
+    /*
+    En JS el tipo de dato rey es el objeto
+
+    En JS las clases no existen, lo que mas cercano que tenemos son los objetos con prototype mediante el cual manejamos la herencia
+
+    Todos los objetos heredan de un prototype, que a su vez hereda de otro prototype
+
+    La palabra 'new' es la que declara la herencia
+    */
+
+    // object literal: objeto común y corriente: lista de keys y values
+    /*--Es un poco ineficiente porque los dos objetos son muy similares y para crear otro hay que escribirlo totalmente*/
+    /*const zelda = { name: 'Zelda' } //objeto cualquiera
+    zelda.saludar = function () { //agregando otro espacio en el objeto
+      console.log(`hola soy ${this.name}`)
+    }
+    zelda.saludar()
+
+    const link = { name: 'Link' } 
+    link.saludar = function () {
+      console.log(`hola soy ${this.name}`)
+    }
+    link.saludar()*/
+
+    //--function constructor de Heros
+    /*function Hero(name) {
+      const hero = { //objeto creado dentro de la funcion 
+        name: name
+      }
+      hero.saludar = function() { //nuevo espacio alojado en hero
+        console.log(`hola soy ${this.name}`)
+      }
+      return hero //retornamos el objeto creado
+    }
+    
+    //crea los objetos que heredan sus propiedades de la funcion Hero
+    const zelda =  Hero('Zelda')
+    const link = new Hero('Link')
+    //corremos el metodo que heredaron
+    zelda.saludar()
+    link.saludar()
+    console.log(zelda) //aqui se ve que contiene el objeto*/
+
+
+    //objeto que promete tener la coleccion de metodos
+    /*const heroMethods = { //objeto con los metodos
+      saludar: function() {
+        console.log(`Hola soy ${this.name}`)
+      }
+    }
+    function Hero(name) {
+      const hero = { //objeto creado dentro de la funcion 
+        name: name
+      }
+      hero.saludar = heroMethods.saludar //en lugar de crear la funcion solo la referenciamos al objeto que la contiene ¿pa que?
+      return hero //retornamos el objeto creado
+    }
+    //crea los objetos que heredan sus propiedades de la funcion Hero
+    const zelda =  Hero('Zelda')
+    const link = new Hero('Link')
+    //corremos el metodo que heredaron
+    zelda.saludar()
+    link.saludar()*/
+
+    //--Crear un objeto mediante Object.create
+    //Object.create crea un nuevo objeto a partir de otro
+    //const newObject = Object.create(object)
+
+    /*const heroMethods = { //objeto con los metodos
+      saludar: function() {
+        console.log(`Hola soy ${this.name}`)
+      }
+    }
+    function Hero(name) {
+      //creamos un objeto con todas las propiedades de heroMethods
+      const hero = Object.create(heroMethods)
+      hero.name = name //de esta manera incluimos a name, que aqui le damos valor
+      return hero //retornamos el objeto creado
+    }
+    //crea los objetos que heredan sus propiedades de la funcion Hero
+    const zelda =  Hero('Zelda')
+    const link = new Hero('Link')
+    //corremos el metodo que heredaron
+    zelda.saludar()
+    link.saludar()
+
+    //--entendiendo a Object.create()
+    //desde consola
+    const newHero = Object.create(heroMethods)
+    newHero.saludar //obtenemos la sintaxis del metodo
+    newHero
+    //vemos que solo tiene un objeto __proto__, pero porque no tiene saludar? si abrimos proto veremos que si lo tiene, pero tiene otro __proto__*/
+
+    //--ponemos los metodos de hero en su objeto prototype, que es un metodo que tienen todos los objetos, por lo tanto hero tambien
+    //inicialmente prototype es un objeto vacio que solo contiene el constructor
+    /*function Hero(name) {
+      //crea un objeto a partir del prototype al que le podemos ir agregando mas cosas
+      const hero = Object.create(Hero.prototype)
+      hero.name = name //de esta manera incluimos a name, que aqui le damos valor
+      return hero //retornamos el objeto creado
+    }
+    Hero.prototype.saludar = function() {
+      console.log(`Hola soy ${this.name}`)
+    }
+    //crea los objetos que heredan sus propiedades de la funcion Hero
+    const zelda =  Hero('Zelda')
+    const link = new Hero('Link')
+    //corremos el metodo que heredaron
+    zelda.saludar()
+    link.saludar()*/
+
+    //--que hace new? azucar sintactica
+    //nos hace implicitos el agregar metodos por medio del prototype
+    //nos hace usar this como valores de la instancia
+    //hace el return implicito por medio del objeto prototipal
+    function Hero(name) {
+      
+      //const hero = Object.create(Hero.prototype) implicito por new
+      this.name = name //de esta manera incluimos a name, que aqui le damos valor
+      //return hero //implicito por new
+    }
+    Hero.prototype.saludar = function() {
+      console.log(`Hola soy ${this.name}`)
+    }
+    //crea los objetos que heredan sus propiedades de la funcion Hero
+    //ademas que new hace que hereden del prototype
+    //es decir que los metodos sean obtenidos en this
+    const zelda = new Hero('Zelda')
+    const link = new Hero('Link')
+    //corremos el metodo que heredaron
+    zelda.saludar()
+    link.saludar()
+
+
+
+    /*Al final 
+    tenemos que al inicializar una variable con new la estamos instanciando como objeto que maneja el this y que maneja propiedades como metodos y variables a partir de su objeto prototype
+
+    Por lo tanto Objetos que pueden heredad sus propiedades a variables y otros objetos
+    */
+  </script>
+</body>
+</html>

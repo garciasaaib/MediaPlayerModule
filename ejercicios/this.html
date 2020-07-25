@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This</title>
+</head>
+<body>
+  <a href="/ejercicios/">Go back</a>
+  <p><em>Abre la consola</em></p>
+
+  <script>
+    // this fuera de todo
+    console.log(`global scope: ${this}`)
+
+    // this dentro de una funcion
+    function whoIsThis() {
+      return console.log(`function scope: ${this}`)
+    }
+    whoIsThis()
+
+    // this dentro de una funcion con modo strict
+    function whoIsThisStrict() {
+      'use strict'
+      return console.log(`function scope with strict: ${this}`)
+    }
+    whoIsThisStrict()
+
+    // this dentro de un objeto
+    const person = { //this es todo este objeto
+      name: 'this in object',
+      saludar: function() {
+        console.log(`object scope: ${this.name}`)
+      }
+    }
+    person.saludar()
+
+    // this dentro de un objeto y sacado del objeto
+    const gente = { //this es todo este objeto
+      name: 'this in object',
+      saludar: function() {
+        console.log(`object scope in other object: ${this.name}`)
+      }
+    }
+    const gentes = gente.saludar //no obtiene el valor porque esta accesando a this
+    //const gentes = gente.name //obtiene el valor porque accede al mismo sin this
+    gentes()
+
+
+    //this dentro de una 'clase' 
+    function Person(name) { //constructor por defecto de la clase
+      this.name = name
+    }
+    Person.prototype.saludar = function(){
+      console.log(`class scope: ${this.name}`)
+    }
+    const adrian = new Person('this name')
+    adrian.saludar()
+  </script>
+</body>
+</html>

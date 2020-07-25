@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Call, Apply, Bind</title>
+</head>
+<body>
+  <a href="/ejercicios/">Go back</a>
+  <p><em>Abre la consola</em></p>
+
+
+  <ul>
+    <li><button class="btn">Aprende</button></li>
+    <li><button class="btn">Aprende Más</button></li>
+    <li><button class="btn">Aprende Más Mucho Más</button></li>
+  </ul>
+  <script>
+    //funcion cualquiera que en realidad no tiene this
+    function saludar() {
+      console.log(`Hola soy ${this.name} ${this.last}`)
+    }
+
+    //un objeto cualquiera que puede ser tu instancia ;)
+    const adrian = {
+      name: 'Adrian',
+      last: 'Garcia'
+    }
+
+    //corre la funcion y declaras la el objeto adrian como instancia
+    saludar.call(adrian)
+
+    //ahora otra funcion con argumentos y this
+    function saludarMas(cantidad, cosa) {
+      console.log('Soy', this.name, 'y tengo', cantidad, cosa)
+    }
+
+    //con call se manda la instacia y los argumentos que quieras con coma
+    saludarMas.call(adrian, 12, 'casas')
+
+    //con apply se manda la instacia, coma, y los argumentos que quieras en un array
+    saludarMas.apply(adrian, [3, 'camellos'])
+
+    //bind no ejecuta la funcion
+    // crea una funcion (la que es llamada) con el objeto instanciado
+    const saludarBind = saludarMas.bind(adrian, 3, `pc's`)
+    console.log(saludarBind) //despues ejecutas la funcion
+
+    // puedes mandar argumentos donde quieras
+    const saludarBind2 = saludarMas.bind(adrian, 3)
+    saludarBind2(`pc's`) //despues ejecutas la funcion
+
+
+
+    /* ejemplo para establecer otro this
+    tienes 3 botones y a todos quieres darles el evento onclick 
+    y obtener el mismo resultado, un alert que diga perfecto
+    esto mediante la funcion que saque el alert
+    */
+    //obtienes todos los botones por su classname
+    const buttons = document.getElementsByClassName('btn')
+    
+    function sacaAlert(){alert('perfecto')}
+    //y decides darles el onclick por medio de un foreach
+    /*buttons.forEach(button => {
+      button.onclick = () => alert('perfecto')
+    });*/
+    // esto tiene un pequeño problema y es que buttons no es un array, 
+    // buttons es un node list
+    //pero si usas el console.log te saldra que es un HTMLCollection
+    console.log(buttons)
+    //mediante esto podemos ver que tienen una propiedad llamada lenght
+    // y esto es suficiente para poder darle el this de la instancia array
+    // que la instancia array existe por defecto en el navegador
+
+    //llama al forEach mediante el prototype de Array 
+    // y se asigna el contexto mediante buttons
+    // con esto simulamos que buttons es this y su metodo inmediato 
+    //crea el foreach para cada button
+    Array.prototype.forEach.call(buttons, button => {
+      button.onclick = () => sacaAlert()
+    });
+
+    //otra manera
+    /*const btns = [...buttons]
+    btns.forEach(button => {
+      button.onclick = () => sacaAlert()
+    })*/
+
+    //otra manera
+    
+    /*Object.values(buttons).forEach(element => {
+      element.onclick = () => alert('perfecto')
+    });*/
+
+    /*Array.from(buttons).forEach(element=>{
+      element.onclick = () => alert('perfecto')
+    })*/
+  </script>
+</body>
+</html>

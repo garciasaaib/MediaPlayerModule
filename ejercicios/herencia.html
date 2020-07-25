@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Herencia Prototipal</title>
+</head>
+<body>
+  <a href="/ejercicios/">Go back</a>
+  <p><em>Abre la consola</em></p>
+
+  <script>
+    /*herencia prototipal es lo que conecta a hero.saludar con hero.__proto__ saludar
+    
+    - todo en JS acaba en el objeto 'objeto'
+    - la manera en la que se maneja la herencia es
+    - El objeto 'object' es el punto de partida de todos los objetos en javascript, eso incluye a las 'clases' y a las funciones
+    */
+
+    function Hero(name) { // definimos hero
+      this.name = name
+    }
+    Hero.prototype.saludar = function() {
+      console.log(`Hola, soy ${this.name}`)
+    }
+    const zelda = new Hero('Zelda')
+
+    //-- Propiedades de la instancia
+    //console.log('Name: ' + zelda.name)
+
+    //-- propiedades de la clase, donde estan las instancias
+    //console.log('Saludar: ' + zelda.saludar)
+
+    //-- desde la instancia tenemos algunos metodos que ya existen y que podemos usar
+    console.log('Saludar: ' + zelda.toString)
+
+
+  </script>
+</body>
+</html>
