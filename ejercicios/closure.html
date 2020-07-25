@@ -59,7 +59,7 @@
             return count = count + 1
           },
           decrease: function () {
-            count
+            return count
           },
           getCount: function () {
             return count = n
@@ -69,7 +69,11 @@
 
       let counter = makeCounter(7)
 
-      console.log(counter.decrease())  
+      console.log(counter.increase())
+
+
+      console.log(counter)
+    
       </script>
 </body>
 </html>

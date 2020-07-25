@@ -1,0 +1,118 @@
+<html>
+  <head>
+    <title>Promesas</title>
+  </head>
+
+  <body>
+    <ahref="/ejercicios/">Go back</a>
+
+    <ul>
+      <li><button id="sequence">Get Top Movies in Sequence</button></li>
+      <li><button id="parallel">Get Top Movies in Parallel</button></li>
+      <li><button id="fastest">Get Fastest Top Movie</button></li>
+    </ul>
+
+    <ul id="movies"></ul>
+
+    <script>
+      // Ejemplo: renderMovies([{ title: "Spider-Man", release_date: "2019-06-30", poster_path: "/rjbNpRMoVvqHmhmksbokcyCr7wn.jpg" }])
+      // Traducir las funciones de usar thens a usar async/await
+      // Crear función para que no nos gastemos la cantidad de requests demasiado rapido
+      // Crear función donde hacemos requests secuenciales
+      // Crear función donde hacemos requests en paralelo
+      // Crear función donde obtenemos el primer request que llegue
+
+      // The Movie Database API: https://developers.themoviedb.org/3/getting-started/introduction
+      const apiKey = 'b89fc45c2067cbd33560270639722eae';
+
+
+/*                    --Peticiones--                    */
+async function getMovie(id) {        
+      const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`
+      const response = await fetch(url)
+      const data = await response.json()
+      return data
+}
+async function getPopularMovies() {
+      const url = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${apiKey}`
+      const response = await fetch(url)
+      const data = await response.json()
+      return data
+}
+async function getTopMoviesIds(n = 3) {
+      const popularMovies = await getPopularMovies();
+      const ids = await popularMovies.results.slice(0,n).map(movie => movie.id);
+      return ids;
+}
+
+
+/*                    --Renderizado de Data--                    */
+function renderMovies(movies) { //obtiene un array de peliculas
+      const movieList = document.getElementById('movies') //obtiene el tag
+      movieList.innerHTML = '' // declara el contenido vacio
+
+      movies.forEach(movie => { // toma el array de peliculas y hace el foreach
+        const listItem =  document.createElement('li') //crea dentro un tag li
+        listItem.innerHTML = `
+          <img src="http://image.tmdb.org/t/p/w342${movie.poster_path}" />
+          <h5>${movie.title}</h5>
+          <p>Released on <em>${movie.release_date}</em></p>
+        `
+				// append =  adjuntar: adjunta el elemento li al elemento padre
+        movieList.appendChild(listItem) 
+      })
+}
+
+/*                    --Funciones de Orden de Renderizado--                    */
+    //de esta manera obtenemos por orden las 3 peticiones
+async function getTopMoviesInSequence() {
+      const ids = await getTopMoviesIds() //peticion de ids de peliculas
+      const movies = [] // creamos un array vacio
+      for (const id of ids) { //ids de peliculas uno por uno
+        const movie = await getMovie(id) //peticion mediante el id de la peli
+        movies.push(movie) //grega el objeto en el array de peliculas
+      }
+      return movies
+}
+
+    //de esta otra manera obtenemos en paralelo todas las peliculas
+    //todas son devueltas al mismo tiempo
+async function getTopMoviesInParallel() {
+      const ids = await getTopMoviesIds() //obtenemos ids
+      //obtenemos la pelicula de cada espacio en el array
+      // cada id pasa a ser una promesa de getMovie
+      const moviePromises = ids.map(id => getMovie(id)) 
+			//en movies retornamos todas las promesas y all espera a que todas las promesas sean resueltas
+      const movies = await Promise.all(moviePromises)
+      return movies
+}
+
+
+    // ver las promesas conforme van siendo recibidas
+async function getFastestTopMovie() {
+      const ids = await getTopMoviesIds() //obtenemos ids
+      //superpone cada una de las peticiones sobre el id
+      const moviePromises = ids.map(id => getMovie(id)) 
+      // se pinta la primera que regrese
+      const movies = await Promise.race(moviePromises)
+      return movies //aqui regresara como un array
+}
+    
+/*                    --Botones--                    */
+document.getElementById('sequence').onclick = async function() {
+        const movies = await getTopMoviesInSequence();
+        //console.log(movies)
+        renderMovies(movies);
+};
+document.getElementById('parallel').onclick = async function() {
+        const movies = await getTopMoviesInParallel();
+        //console.log(movies)
+        renderMovies(movies);
+};
+document.getElementById('fastest').onclick = async function() {
+        const movie = await getFastestTopMovie();
+        renderMovies([movie]);
+};
+    </script>
+  </body>
+</html>
