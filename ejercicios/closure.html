@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Closure</title>
+</head>
+<body>
+  <a href="/ejercicios/">Go back</a>
+  <p><em>Abre la consola</em></p>
+
+  <script>
+     /*---IFEE*/
+      //el problema aqui es que la funcion esta en el scope global y si escribimos en conosola color nos regresa el valor
+      /*let color = "green"
+      function printColor() {
+        console.log(color)
+      }
+      printColor()*/
+
+      //Esto se usaba antes del ES5
+
+      //por esto creamos una funcion que se va a llamar automaticamente
+      //esto se llama IIFE (Inmediately Invoce Function Expression)
+      //la variable color solo existe en la funcion que se corrio automaticamente
+      (function() {  
+        let color = "green"
+        function printColor() {
+          console.log(color)
+        }
+        printColor()
+      })()
+
+
+      /*---Funciones que regresan funciones*/
+      //closures son el manejo de funciones por medio del scope
+      function makeColorPrinter(color) {
+        let colorMessage = `the color is ${color}`
+        return function () { //retornamos una 
+          console.log(colorMessage)
+        }
+      }
+      let greenColorPrinter = makeColorPrinter("green")
+      greenColorPrinter()
+      //lo que en realidad es greenColorPrinter es una funcion por lo que hay que ejecutarlo si queremos obtener el mensaje como respuesta
+
+
+      /*---Variables privadas*/
+      /*const counter = {
+        count: 3,
+      }
+      console.log(counter.count) //no quiero que nadie tenga acceso a este valor
+      */
+      //el valor de una funcion no se puede leer directamente 
+      function makeCounter(n) {
+        let count = n
+        return {
+          increase: function () {4
+            return count = count + 1
+          },
+          decrease: function () {
+            return count
+          },
+          getCount: function () {
+            return count = n
+          },
+        }
+      }
+
+      let counter = makeCounter(7)
+
+      console.log(counter.increase())
+
+
+      console.log(counter)
+    
+      </script>
+</body>
+</html>

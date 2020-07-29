@@ -1,27 +1,22 @@
 {
-  "name": "video_play",
+  "name": "media-player",
   "version": "1.0.0",
-  "description": "Programa para ver videos y controlarlo",
+  "description": "Proyecto del curso profecional JavaScript",
   "main": "index.js",
   "scripts": {
-    "start": "live-server"
+    "start": "parcel index.html ejercicios/index.html ejercicios/**/*.html"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/adranuz/video_player.git"
-  },
-  "keywords": [
-    "javascript",
-    "vanilla"
-  ],
-  "author": "Adrian Garcia",
+  "keywords": [],
+  "author": "Adrian <garciasaaib@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/adranuz/video_player/issues"
-  },
-  "homepage": "https://github.com/adranuz/video_player#readme",
   "devDependencies": {
-    "live-server": "^1.2.1",
+    "@typescript-eslint/eslint-plugin": "^3.7.0",
+    "@typescript-eslint/parser": "^3.7.0",
+    "eslint": "^7.5.0",
     "parcel-bundler": "^1.12.4"
-  }
+  },
+  "browserlist": [
+    "last 1 Chrome version"
+  ],
+  "dependencies": {}
 }

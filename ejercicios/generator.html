@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generator</title>
+</head>
+<body>
+  <a href="/ejercicios/">Go back</a>
+  <p><em>Abre la consola</em></p>
+
+  <script>
+    /*generador
+    los generadores no son ejecutables de por si, 
+    se debe asignar y despues ejecutar con su metodo next
+    */
+    function* simpleGenerator() {
+      console.log('start')
+      yield //es como el return 
+      console.log('end')
+      yield 1 //yield tambien regresa valores, 
+      console.log('other')
+    }
+
+    const simple = simpleGenerator()
+    //simple.next() //execute 
+
+
+    /*generador idMaker*/
+    function* idmaker() {
+      let id = 1
+      while(true) {
+        yield id //regresa el actual id 
+        id = id + 1
+      }
+    }
+    const idgen = idmaker()
+
+
+    /*generador idmakerwithreset*/
+    function* idmakerwithreset() {
+      let id = 0
+      let reset
+      while(true) {
+        //en asignacion yield contiene el parametro
+        reset = yield id 
+        reset ? (id = 0) : id = id + 1
+      }
+    }
+    const idres = idmakerwithreset()
+
+
+    /*generador fibonacci*/
+    function* fibonacci() {
+      let a = 1
+      yield a
+      let b = 1
+      yield b
+      while(true) {
+        const nextNumber = a + b
+        a = b
+        b = nextNumber
+        yield nextNumber
+      }
+    }
+    const fibo = fibonacci()
+  </script>
+</body>
+</html>

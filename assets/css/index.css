@@ -1,0 +1,14 @@
+body {
+  height: 100vh;
+  background: teal;
+  margin: 0;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+header {
+  color: white;
+  background: rgb(237,144,246);
+  background: radial-gradient(circle, rgba(237,144,246,1) 0%, rgba(145,124,230,1) 100%);
+  padding: 10px;
+}

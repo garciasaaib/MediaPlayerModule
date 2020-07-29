@@ -1,63 +1,52 @@
 const VERSION = 'v1'
 
-self.addEventListener('install', event => {
-    //esto esperara la respuesta para que funcione
-    event.waitUntil(precache());
-});
 
-async function precache() {
-  const cache = await caches.open(VERSION);
-  return cache.addAll([
-    //todos los archivos que hemos escrito los guardaremos en cache
-      '/',
-      '/index.html',
-      '/assets/index.js',
-      '/assets/MediaPlayer.js',
-      '/assets/pluggins/AutoPlay.js',
-      '/assets/pluggins/AutoPause.js',
-      '/assets/video.mp4', 
-  ]);
-}
-
-
-//obtener un lisener para los fetch
-//que es la traduccion de cuando se pida un contenido 
-//se revise los archivos subidos
-self.addEventListener('fetch', event => {
-    const request = event.request;
-    // get
-    if (request.method != 'GET') {
-      return;
-    }
-  
-    // buscar en cache
-    event.respondWith(cachedResponse(request));
-
-    //Update the cache
-    event.waitUntil(updateCache(request));
-
+//self es como el this pero especifico para serviceWorkers
+self.addEventListener('install', event => { //instala el serviceWorker
+  event.waitUntil(precache()) // a ejecutar una funcion y va a esperar la respuesta
 })
 
-
-
-async function cachedResponse( request ) {
-    //obtiene todo el cache cuardada en la version
-    const cache = await caches.open(VERSION);
-
-    //verificar si ya hay una copia en cache
-    const response = await cache.match(request);
-
-    //si hay algo responderlo, si no pedirlo al server
-    return response || fetch(request) ;
+async function precache() { //funcion que engloba lo que queremos guardad en cache
+  const cache = await caches.open(VERSION) //declaramos que es la version 1
+  return cache.addAll([ //y que contiene esto
+    '/',
+    '/index.html',
+    '/assets/js/index.js',
+    '/assets/js/MediaPlayer.js',
+    '/assets/js/plugins/AutoPlay.js',
+    '/assets/js/plugins/AutoPause.js',
+    '/assets/css/index.css',
+    '/assets/video.mp4',
+  ])
 }
 
-async function updateCache(request) {
-    //obtener todo el cache de la version
-    const cache = await caches.open(VERSION);
-    
-    //hace una peticion a los archivos
-    const response = await fetch(request);
-    
-    //si los encuentra los manda al cache con cache.put
-    return cache.put(request, response);
+
+
+
+self.addEventListener('fetch', event => { //leer y contestar peticiones get
+  const request = event.request //queremos saber que peticion estamos haciendo
+  // solo obtendremos los get porque lo demas demanda otras cosas
+  
+  //si no es get que corra normalmente
+  if (request.method !== 'GET') {
+    return 
+  }
+
+  //buscar en cache 
+  event.respondWith(cachedResponse(request))
+
+  //actualizar el cache
+  event.waitUntil(updateCache(request))
+})
+
+async function cachedResponse(request) { // buscar en cache
+  const cache = await caches.open(VERSION) // obtenemos el cache
+  const response = await cache.match(request) // existe el cache de este fetch?
+  return response || fetch(request) // regresa el cachè o sino manda a pedir ese fetch
+}
+
+async function updateCache(request) { // actualizar cache
+  const cache = await caches.open(VERSION) // obtenemos el cache
+  const response = await fetch(request) // get a internet
+  return cache.put(request, response) // colocamos el nuevo cache
 }
