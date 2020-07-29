@@ -4,7 +4,7 @@
   "description": "Proyecto del curso profecional JavaScript",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html ejercicios/index.html ejercicios/**/*.html"
+    "start": "parcel index.html ejercicios/index.html ejercicios/*.html"
   },
   "keywords": [],
   "author": "Adrian <garciasaaib@gmail.com>",
