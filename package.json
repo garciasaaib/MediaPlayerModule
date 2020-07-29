@@ -4,7 +4,7 @@
   "description": "Proyecto del curso profecional JavaScript",
   "main": "index.js",
   "scripts": {
-    "start": "live-server --entry-file=index.html"
+    "start": "parcel index.html ejercicios/index.html ejercicios/**/*.html"
   },
   "keywords": [],
   "author": "Adrian <garciasaaib@gmail.com>",
@@ -13,6 +13,10 @@
     "@typescript-eslint/eslint-plugin": "^3.7.0",
     "@typescript-eslint/parser": "^3.7.0",
     "eslint": "^7.5.0",
-    "live-server": "^1.2.1"
-  }
+    "parcel-bundler": "^1.12.4"
+  },
+  "browserlist": [
+    "last 1 Chrome version"
+  ],
+  "dependencies": {}
 }
