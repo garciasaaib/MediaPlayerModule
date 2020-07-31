@@ -2,7 +2,7 @@ const VERSION = 'v1'
 
 
 //self es como el this pero especifico para serviceWorkers
-self.addEventListener('install', event => { //instala el serviceWorker
+self.addEventListener('install', (event) => { //instala el serviceWorker
   event.waitUntil(precache()) // a ejecutar una funcion y va a esperar la respuesta
 })
 

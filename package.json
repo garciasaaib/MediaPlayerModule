@@ -13,10 +13,12 @@
     "@typescript-eslint/eslint-plugin": "^3.7.0",
     "@typescript-eslint/parser": "^3.7.0",
     "eslint": "^7.5.0",
-    "parcel-bundler": "^1.12.4"
+    "parcel-bundler": "^1.12.4",
+    "typescript": "^3.9.7"
   },
-  "browserlist": [
-    "last 1 Chrome version"
+  "browserslist": [
+    "last 3 and_chr versions",
+    "last 3 chrome versions"
   ],
   "dependencies": {}
 }

@@ -16,7 +16,11 @@ toggleMuteBtn.onclick = () => player.toggleMute()
 
 // verificar si existe serviceWorker en el navegador
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js').catch(error => { // registrar el serviceWorker 
-    console.log(error.message) // manejar el error
-  })
+  navigator.serviceWorker.register('/sw.js')
+    .then(() => {
+      console.log("Service Worker Registered"), registration
+    })
+    .catch(error => { // registrar el serviceWorker 
+      console.log(error.message) // manejar el error
+    })
 }
