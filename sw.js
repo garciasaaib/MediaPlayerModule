@@ -9,14 +9,14 @@ self.addEventListener('install', (event) => { //instala el serviceWorker
 async function precache() { //funcion que engloba lo que queremos guardad en cache
   const cache = await caches.open(VERSION) //declaramos que es la version 1
   return cache.addAll([ //y que contiene esto
-    '/',
+    /*'/',
     '/index.html',
     '/assets/js/index.js',
     '/assets/js/MediaPlayer.js',
     '/assets/js/plugins/AutoPlay.js',
     '/assets/js/plugins/AutoPause.js',
     '/assets/css/index.css',
-    '/assets/video.mp4',
+    '/assets/video.mp4',*/
   ])
 }
 
