@@ -1,9 +1,9 @@
-import MediaPlayer from './MediaPlayer.js'
-import AutoPlay from './plugins/AutoPlay.js'
-import AutoPause from './plugins/AutoPause.js'
+import MediaPlayer from './MediaPlayer'
+import AutoPlay from './plugins/AutoPlay'
+import AutoPause from './plugins/AutoPause'
 const video = document.querySelector('video')
-const togglePlayBtn = document.querySelector('.toggle-play')
-const toggleMuteBtn = document.querySelector('.toggle-mute')
+const togglePlayBtn: HTMLElement = document.querySelector('.toggle-play')
+const toggleMuteBtn: HTMLElement = document.querySelector('.toggle-mute')
 
 
 const player = new MediaPlayer({ 
@@ -18,7 +18,7 @@ toggleMuteBtn.onclick = () => player.toggleMute()
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js')
     .then(() => {
-      console.log("Service Worker Registered"), registration
+      console.log("Service Worker Registered")
     })
     .catch(error => { // registrar el serviceWorker 
       console.log(error.message) // manejar el error
