@@ -1,12 +1,22 @@
 class MediaPlayer {
   media: HTMLMediaElement // se sabe con el console.log
   plugins: Array<any>
+  container: HTMLElement
 
   constructor(config) {
     this.media = config.el
     this.plugins = config.plugins || []
-
+    this.initPlayer() //mover el player a otro contenedor
     this.initPlugins() //los metodos pueden ser inicializados aqui mediante this
+  }
+
+  initPlayer() {
+    this.container = document.createElement('div')
+    this.container.style.position = 'relative'
+    //tomamos a media y le ponemos a la misma altura al contenedor
+    this.media.parentNode.insertBefore(this.container, this.media)
+    //tomamos al contenedor y le ingresamos a media
+    this.container.appendChild(this.media)
   }
   private initPlugins() {
     //no queremos que el plugin tenga todo el objeto this, puede ser peligroso 
