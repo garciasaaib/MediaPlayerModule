@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Singleton</title>
+</head>
+<body>
+  <a href="/ejercicios/index.html">Go back</a>
+  <p><em>Sigleton Pattern</em></p>
+
+  <p><small>
+    Es un patron que asegura que una clase tiene solamente una instancia.
+    <br>
+    <br>
+    La clase es como la receta de lo que debe tener un objeto.
+    Una instancia es el objeto creado a partir de una clase o de otro objeto.
+    <br>
+    <br>
+    
+    Es decir que solo podemos crear un objeto que haya sido creado con esa clase, si queremos otro objeto no podremos crearlo o nos retornará la instancia ya creada, es decir que se hará referencia al primer objeto creado a partir de esa clase.
+    <br>
+    <br>
+    
+    <br>
+    - El nombre de la clase seria Singleton.
+    <br>
+    - Tendrá una propiedad instance, que será privada y será estatico.
+    <br>
+    - Tendremos el constructor con el mismo nombre de la clase, pero sera privado por lo que no podemos crear instancias con new Singleton.
+    <br>
+    - getInstance es un metodo mediante el cual ve si ya existe una instancia, si no existe la va a crear y la va a regresar, si ya existe regresa ya que ya existe.
+    <br>
+    <br>
+    
+    Ejemplo: mongoose es una libreria para manejar mongoDB, y maneja este patrón porque genera una instancia de la base de datos, de manera que solo es creada esta instancia 1 vez, si se intenta de nuevo nos regresa la misma instancia de la DB por medio del caché.
+    
+    </small></p>
+
+    <p><strong>Abre la consola</strong></p>
+  <script src="./index.ts"></script>
+</body>
+</html>

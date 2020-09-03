@@ -27,3 +27,7 @@ A **Design Pattern** is the response to common problems that are normally inside
 - Wrotten 
 
 
+### Patterns added
+- Singleton
+- Observer
+- Decorator
