@@ -1,4 +1,7 @@
 ## micromediaplayer module
+
+https://github.com/adranuz/MediaPlayer
+
 MediaPlayer is a JS module that works as a manager of video thougth some inputs and methods
   - You can mute, unmute, play, pause, by buttons that has access to MediaPlayer module
   - AutoPlay plugin plays the video when the page is changed
