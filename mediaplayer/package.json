@@ -1,0 +1,12 @@
+{
+  "name": "micromediaplayer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/MediaPlayer.js",
+  "scripts": {
+    "build": "tsc src/**/*.ts src/plugins/*.ts src/plugins/**/*.ts --outDir lib"
+  },
+  "keywords": [],
+  "author": "@adranuz",
+  "license": "ISC"
+}

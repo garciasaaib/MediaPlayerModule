@@ -7,7 +7,7 @@
  * - getInstance verifica si ya hay una instancia antes de crear una nueva
  */
 //objeto del anuncio
-interface Ad {
+export interface Ad {
   imageUrl: string
   title: string
   body: string
