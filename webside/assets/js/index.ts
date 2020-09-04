@@ -1,7 +1,7 @@
-import MediaPlayer from './MediaPlayer'
-import AutoPlay from './plugins/AutoPlay'
-import AutoPause from './plugins/AutoPause'
-import Ads from './plugins/Ads'
+import MediaPlayer from 'micromediaplayer/lib/MediaPlayer'
+import AutoPlay from 'micromediaplayer/lib/plugins/AutoPlay'
+import AutoPause from 'micromediaplayer/lib/plugins/AutoPause'
+import Ads from 'micromediaplayer/lib/plugins/Ads'
 const video = document.querySelector('video')
 const togglePlayBtn: HTMLElement = document.querySelector('.toggle-play')
 const toggleMuteBtn: HTMLElement = document.querySelector('.toggle-mute')

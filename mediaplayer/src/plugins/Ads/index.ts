@@ -1,6 +1,6 @@
 //este documento implementa los ads en el MediaPlayer para poder utilizar sus metodos play y pause
 import MediaPlayer from '../../MediaPlayer'
-import Ads, {Ad} from './Ads'
+import Ads, { Ad } from './Ads'
 
 //este es un plugin por lo que se agrega los metodos correspondientes
 class AdsPlugin {
